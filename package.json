@@ -15,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --config=jest.config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,24 +45,22 @@
   },
   "jest": {
     "moduleNameMapper": {
+      "^lodash-es$": "lodash",
       "^axios$": "axios/dist/node/axios.cjs"
     },
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest",
-      "^.+\\.mjs$": "babel-jest"
-    },
-    "testEnvironment": "jsdom",
-    "testMatch": [
-      "**/__tests__/**/*.js?(x)",
-      "**/?(*.)+(spec|test).js?(x)"
-    ],
     "moduleFileExtensions": [
       "js",
       "jsx",
       "mjs"
     ],
+    "testEnvironment": "jsdom",
+    "testMatch": ["<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}", "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest",
+      "^.+\\.mjs$": "babel-jest"
+    },
     "transformIgnorePatterns": [
-      "node_modules/(?!(axios)/)"
+      "node_modules/(?!(axios)/)", "<rootDir>/node_modules/"
     ]
   }
 }
