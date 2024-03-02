@@ -1,0 +1,12 @@
+version: '3'
+services:
+  my-news-aggregator:
+    container_name: my-news-aggregator-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./.env
+    stdin_open: true
