@@ -1,17 +1,20 @@
-import axios from 'axios';
 import { NEWS_API, GUARD_API, NY_API, UNICAL_KEY } from '../constants';
 
 const getResult = async (link, data, source) => {
 	try {
-		const response = await axios.get(link, { withCredentials: true });
+		const response = await fetch(link, { credentials: 'include' });
+		if (!response.ok) {
+			throw new Error(`Failed to fetch data from ${link}: ${response.status} ${response.statusText}`);
+		}
+		const responseData = await response.json();
 		const keys = data.split('.');
-		let result = response;
+		let result = responseData;
 
 		for (const key of keys) {
-			result = result[key];
+			result = result && result[key];
 		}
 
-		return result.map(e => ({[UNICAL_KEY]: source, ...e}));
+		return (result || []).map(e => ({[UNICAL_KEY]: source, ...e}));
 	} catch (error) {
 		throw error;
 	}
@@ -62,14 +65,14 @@ const ApiService = {
 		}
 
 		const url = buildSearchUrl(baseUrl, search ? { search, date } : { category, author }, NEWS_API);
-		return await getResult(url, 'data.articles', NEWS_API);
+		return await getResult(url, 'articles', NEWS_API);
 	},
 
 	// Documentation: https://open-platform.theguardian.com/documentation/
 	getGuardianapisArticles: async ({search, category, date, author}) => {		
 		const url = `https://content.guardianapis.com/search?api-key=${process.env.REACT_APP_GURDIANAPIS_KEY}&q=news`;
 		const urlWithParams = buildSearchUrl(url, { search, category, date, author }, GUARD_API);
-		return await getResult(urlWithParams, 'data.response.results', GUARD_API);
+		return await getResult(urlWithParams, 'response.results', GUARD_API);
 	},
 
   // Documentation: https://developer.nytimes.com/apis
@@ -80,7 +83,7 @@ const ApiService = {
 			: `https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${process.env.REACT_APP_NYTIMESAPI_KEY}`;
 	
 		const urlWithParams = buildSearchUrl(baseUrl, { search, category, date, author }, NY_API);
-		return await getResult(urlWithParams, isNotMain ? 'data.response.docs' : 'data.results', NY_API);
+		return await getResult(urlWithParams, isNotMain ? 'response.docs' : 'results', NY_API);
 	}
 };
 

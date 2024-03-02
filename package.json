@@ -6,7 +6,6 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.6.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -15,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,27 +41,5 @@
     "@babel/preset-react": "^7.23.3",
     "babel-jest": "^29.7.0",
     "babel-plugin-lodash": "^3.3.4"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules",
-      "\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/__mocks__/fileMock.js",
-      "^lodash-es$": "lodash",
-      "^axios$": "axios/dist/node/axios.cjs"
-    },
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "mjs"
-    ],
-    "testEnvironment": "jsdom",
-    "testMatch": ["<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}", "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"],
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest",
-      "^.+\\.mjs$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!(axios)/)", "<rootDir>/node_modules/"
-    ]
   }
 }
