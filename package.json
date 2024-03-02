@@ -40,7 +40,8 @@
     "@babel/core": "^7.24.0",
     "@babel/preset-env": "^7.24.0",
     "@babel/preset-react": "^7.23.3",
-    "babel-jest": "^29.7.0"
+    "babel-jest": "^29.7.0",
+    "babel-plugin-lodash": "^3.3.4"
   },
   "jest": {
     "moduleNameMapper": {
@@ -51,8 +52,15 @@
       "^.+\\.mjs$": "babel-jest"
     },
     "testEnvironment": "jsdom",
-    "testMatch": ["**/__tests__/**/*.js?(x)", "**/?(*.)+(spec|test).js?(x)"],
-    "moduleFileExtensions": ["js", "jsx", "mjs"],
+    "testMatch": [
+      "**/__tests__/**/*.js?(x)",
+      "**/?(*.)+(spec|test).js?(x)"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "mjs"
+    ],
     "transformIgnorePatterns": [
       "node_modules/(?!(axios)/)"
     ]
