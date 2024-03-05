@@ -15,10 +15,7 @@ This is a simple React-based news aggregator app that fetches news articles from
 ## Technologies Used
 
 - React
-- Axios
 - CSS (styled with CSS modules)
-- Redux (for managing state)
-- Redux Toolkit (for simplifying Redux setup)
 
 ## Getting Started
 
